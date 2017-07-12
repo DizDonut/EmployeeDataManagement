@@ -26,8 +26,13 @@
 
   	database.ref().push(newEmployee);
 
+    database.ref().on("value", function(snapshot){
+      
+      
+    });
 
-  	$("#sheet > <table>").html("<td>" + name + "<td>" + role + "<td>" 
+
+  	$("#sheet > <table>").append("<td>" + name + "<td>" + role + "<td>" 
   		+ sDate + "<td>" + rate);
 
   });
