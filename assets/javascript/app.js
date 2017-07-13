@@ -8,31 +8,43 @@
   };
   firebase.initializeApp(config);
 
-  var database = firebase.database();
+  var dataRef = firebase.database();
 
-  $("#submit").on("click", function(){
+  $("#submit").on("click", function(event){
 
-  	var name = $("#name").val().trim();
-  	var role = $("#role").val().trim();
-  	var sDate = $("#date").val().trim();
-  	var rate = $("#rate")val().trim();
+      event.preventDefault();
 
-  	var newEmployee = {
-  		name: name,
-  		role: role,
-  		sDate: sDate,
-  		rate: rate
-  	};
+    	var name = $("#name").val().trim();
+    	var role = $("#role").val().trim();
+    	var sDate = $("#date").val().trim();
+    	var rate = $("#rate").val().trim();
 
-  	database.ref().push(newEmployee);
-
-    database.ref().on("value", function(snapshot){
-      
-      
+    	dataRef.ref("/employees").push({
+        name: name,
+        role: role,
+        sDate: sDate,
+        rate: rate
+      });
     });
+    dataRef.ref("/employees").on("child_added", function(childSnapshot){
 
+        name = childSnapshot.val().name;
+        role = childSnapshot.val().role;
+        sDate = childSnapshot.val().sDate;
+        rate = childSnapshot.val().rate;
 
-  	$("#sheet > <table>").append("<td>" + name + "<td>" + role + "<td>" 
-  		+ sDate + "<td>" + rate);
+        $("#sheet").append("<tr> <td>" + name + "<td>" + role + "<td>" 
+              + sDate + "<td>" + rate);
+      });
 
-  });
+    // dataRef.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot) {
+
+    //       $("#name").html(snapshot.val().name);
+    //       $("#role").html(snapshot.val().role);
+    //       $("#date").html(snapshot.val().sDate);
+    //       $("#rate").html(snapshot.val().rate);
+
+          
+    //   });
+
+    	
