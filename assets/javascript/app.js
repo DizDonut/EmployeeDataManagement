@@ -25,6 +25,11 @@
         sDate: sDate,
         rate: rate
       });
+      
+      $("#name").val("");
+      $("#role").val("");
+      $("#date").val("");
+     $("#rate").val("");
     });
 
     dataRef.ref("/employees").on("child_added", function(childSnapshot){
