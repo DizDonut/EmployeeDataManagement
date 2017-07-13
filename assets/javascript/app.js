@@ -26,6 +26,7 @@
         rate: rate
       });
     });
+
     dataRef.ref("/employees").on("child_added", function(childSnapshot){
 
         name = childSnapshot.val().name;
@@ -33,18 +34,23 @@
         sDate = childSnapshot.val().sDate;
         rate = childSnapshot.val().rate;
 
+        var months = 0;
+        var billed = 0;
+
+        var today = moment();
+
+        months = today.diff(sDate, "months");
+        console.log(months);
+
+        billed = months * rate;
+
+
+
         $("#sheet").append("<tr> <td>" + name + "<td>" + role + "<td>" 
-              + sDate + "<td>" + rate);
+              + sDate + "<td>" + months + "<td>" + rate + "<td>" + billed);
       });
 
-    // dataRef.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot) {
 
-    //       $("#name").html(snapshot.val().name);
-    //       $("#role").html(snapshot.val().role);
-    //       $("#date").html(snapshot.val().sDate);
-    //       $("#rate").html(snapshot.val().rate);
 
-          
-    //   });
 
     	
