@@ -51,8 +51,8 @@
 
 
 
-        $("#sheet").append("<tr> <td>" + name + "<td>" + role + "<td>" 
-              + sDate + "<td>" + months + "<td>" + rate + "<td>" + billed);
+        $("#sheet").append("<tr><td>" + name + "</td><td>" + role + "</td><td>" 
+              + sDate + "</td><td>" + months + "</td><td>" + rate + "</td><td>" + billed + "</td></tr>");
       });
 
 
